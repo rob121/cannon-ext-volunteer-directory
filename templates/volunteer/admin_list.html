@@ -1,0 +1,42 @@
+<section class="volunteer-directory-admin">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Volunteer directory</h1>
+    <a class="btn btn-outline-secondary" href="{{.Base}}/skills">Edit skills</a>
+  </div>
+  <form class="row g-2 mb-3" method="get" action="{{.Base}}">
+    <div class="col-md-8">
+      <label class="visually-hidden" for="volunteer-search">Search</label>
+      <input class="form-control" id="volunteer-search" name="q" type="search" value="{{.Query}}" placeholder="Search name, email, phone, address, skills, or note">
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </form>
+  <p>{{.Total}} {{if eq .Total 1}}person{{else}}people{{end}}</p>
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Phone</th><th>Skills</th><th></th></tr>
+      </thead>
+      <tbody>
+        {{range .Rows}}
+        <tr>
+          <td>{{.Name}}</td>
+          <td>{{.Email}}</td>
+          <td>{{.Phone}}</td>
+          <td>{{.SkillLabels}}{{if .OtherSkill}}{{if .SkillLabels}}, {{end}}{{.OtherSkill}}{{end}}</td>
+          <td><a href="{{$.Base}}/entries/{{.ID}}">View</a></td>
+        </tr>
+        {{else}}
+        <tr><td colspan="5">No submissions match this search.</td></tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{if or .HasPrev .HasNext}}
+  <nav aria-label="Directory pages">
+    {{if .HasPrev}}<a href="{{.Base}}?q={{.Query}}&amp;page={{sub .Page 1}}">Previous</a>{{end}}
+    {{if .HasNext}}<a href="{{.Base}}?q={{.Query}}&amp;page={{add .Page 1}}">Next</a>{{end}}
+  </nav>
+  {{end}}
+</section>

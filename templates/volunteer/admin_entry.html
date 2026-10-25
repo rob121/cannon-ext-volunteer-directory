@@ -1,0 +1,16 @@
+<section class="volunteer-directory-admin">
+  <p><a href="{{.Base}}">Back to directory</a></p>
+  <h1 class="h3">{{.Entry.Name}}</h1>
+  <dl>
+    <dt>Email</dt><dd>{{.Entry.Email}}</dd>
+    <dt>Phone</dt><dd>{{.Entry.Phone}}</dd>
+    <dt>Address</dt><dd>{{.Entry.Address}}</dd>
+    <dt>Skills</dt><dd>{{if .SkillLabels}}{{.SkillLabels}}{{else}}None selected{{end}}</dd>
+    <dt>Other skill</dt><dd>{{if .Entry.OtherSkill}}{{.Entry.OtherSkill}}{{else}}None{{end}}</dd>
+    <dt>Note</dt><dd>{{.Entry.Note}}</dd>
+  </dl>
+  <form method="post" action="{{.Base}}/entries/{{.Entry.ID}}/delete" onsubmit="return confirm('Delete this person?');">
+    {{.CSRFField}}
+    <button class="btn btn-outline-danger" type="submit">Delete</button>
+  </form>
+</section>

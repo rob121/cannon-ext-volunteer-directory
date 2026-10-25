@@ -1,0 +1,45 @@
+<section class="volunteer-directory-page" data-page-item="{{.PageItem}}">
+  <h1 class="card-title">{{.Title}}</h1>
+  {{if .Intro}}<p>{{.Intro}}</p>{{end}}
+  {{if .Sent}}<p class="alert alert-success" role="status">Thank you. Your information was saved.</p>{{end}}
+  <form class="volunteer-directory-form" method="post" action="{{.ActionURL}}">
+    {{.CSRFField}}
+    <input type="hidden" name="return_url" value="{{.ReturnURL}}">
+    <div class="mb-3">
+      <label class="form-label" for="volunteer-name">Name</label>
+      <input class="form-control" id="volunteer-name" name="name" type="text" required autocomplete="name">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="volunteer-address">Address</label>
+      <textarea class="form-control" id="volunteer-address" name="address" rows="3" required autocomplete="street-address"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="volunteer-phone">Phone</label>
+      <input class="form-control" id="volunteer-phone" name="phone" type="tel" required autocomplete="tel">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="volunteer-email">Email</label>
+      <input class="form-control" id="volunteer-email" name="email" type="email" required autocomplete="email">
+    </div>
+    <fieldset class="mb-3">
+      <legend class="form-label">Skills</legend>
+      <p>Select every skill you can offer. You can also describe one that is not listed.</p>
+      {{range $i, $skill := .Skills}}
+      <div class="form-check">
+        <input class="form-check-input" id="skill-{{$i}}" type="checkbox" name="skills" value="{{$skill}}">
+        <label class="form-check-label" for="skill-{{$i}}">{{$skill}}</label>
+      </div>
+      {{end}}
+    </fieldset>
+    <div class="mb-3">
+      <label class="form-label" for="volunteer-other">Other skill</label>
+      <input class="form-control" id="volunteer-other" name="other_skill" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="volunteer-note">Note</label>
+      <textarea class="form-control" id="volunteer-note" name="note" rows="4" required></textarea>
+    </div>
+    <captcha context="form" provider="any"></captcha>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</section>
