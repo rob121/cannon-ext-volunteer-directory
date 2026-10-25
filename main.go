@@ -27,7 +27,7 @@ const (
 	extensionName        = "cannon-ext-volunteer-directory"
 	extensionTitle       = "Volunteer Directory"
 	extensionDescription = "Collects volunteer and vendor contact details, skills, and notes, then lists them for staff search."
-	extensionVersion     = "0.1.0"
+	extensionVersion     = "0.1.1"
 	updateURLBase        = "https://github.com/rob121/cannon-ext-volunteer-directory/releases/download"
 	defaultAdminMenu     = "Volunteer Directory"
 	pageSize             = 20
